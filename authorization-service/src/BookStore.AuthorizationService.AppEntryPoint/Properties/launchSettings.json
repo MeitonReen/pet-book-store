@@ -1,0 +1,48 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:24555",
+      "sslPort": 44336
+    }
+  },
+  "profiles": {
+    "BookStore.AuthorizationService.Web": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:7893",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:7893",
+        "AUTHORIZATION_SERVICE_CONFIG__ISSUER": "http://localhost:7893",
+        "AUTHORIZATION_SERVICE_CONFIG__TOKEN_URI": "http://localhost:7893/api/connect/v1.0.0/token",
+        "AUTHORIZATION_SERVICE_CONFIG__SIGN_IN_URI": "http://localhost:7893/account/sign-in",
+        "APP_CONFIG__ENVIRONMENT": "Development",
+        "APP_CONFIG__SPA_DEVELOPMENT_SERVER_URI": "http://localhost:3000",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__CLIENT_ID": "BookStore.SwaggerUi",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__DISPLAY_NAME": "BookStore.SwaggerUi",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__REDIRECT_URIS__0": "http://localhost:7186/swagger/oauth2-redirect.html",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__REDIRECT_URIS__1": "http://localhost:7187/swagger/oauth2-redirect.html",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__REDIRECT_URIS__2": "http://localhost:7188/swagger/oauth2-redirect.html",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__REDIRECT_URIS__3": "http://localhost:7893/swagger/oauth2-redirect.html",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__REDIRECT_URIS__4": "http://localhost:8001/swagger/oauth2-redirect.html",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__CORS_ORIGINS__0": "http://localhost:7186",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__CORS_ORIGINS__1": "http://localhost:7187",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__CORS_ORIGINS__2": "http://localhost:7188",
+        "DEFAULT_CLIENTS_CONFIG__BOOK_STORE_SWAGGER_UI_CONFIG__CORS_ORIGINS__3": "http://localhost:8001",
+        "SWAGGER_CONFIG__UI__CLIENT_ID": "BookStore.SwaggerUi",
+        "LOG_CONFIG__LOG_FILE_PATH": "./logs/book-store.authorization-service.txt",
+        "LOG_CONFIG__OUTPUT_TEMPLATE": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [{SourceContext:l}] {Message}{NewLine}{Exception}"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

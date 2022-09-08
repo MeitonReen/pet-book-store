@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/ocelot.json",
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/book-category/v1.0.0",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Get",
+        "Patch",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/book-category/v1.0.0",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "<Host and port from environment>",
+          "Port": 7186
+        }
+      ],
+      "SwaggerKey": "book-store.book-service"
+    },
+    {
+      "UpstreamPathTemplate": "/api/book-category/v1.0.0/book-ref",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/book-category/v1.0.0/book-ref",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "<Host and port from environment>",
+          "Port": 7186
+        }
+      ],
+      "SwaggerKey": "book-store.book-service"
+    }
+  ]
+}

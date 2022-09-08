@@ -1,0 +1,94 @@
+#__Build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+WORKDIR /src
+
+ARG BASE_NUGET_SOURCE_INDEX_URI
+ARG BASE_NUGET_SOURCE_NAME
+ARG BASE_NUGET_SOURCE_USER_NAME
+ARG BASE_NUGET_SOURCE_AUTH_TOKEN
+
+ARG AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI
+ARG AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME
+ARG AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME
+ARG AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN
+
+COPY ["./src/BookStore.OrderService.sln", "./"]
+
+COPY ["./src/BookStore.OrderService.AppEntryPoint/*.csproj", "./BookStore.OrderService.AppEntryPoint/"]
+COPY ["./src/BookStore.OrderService.BL/*.csproj", "./BookStore.OrderService.BL/"]
+COPY ["./src/BookStore.OrderService.Configs/*.csproj", "./BookStore.OrderService.Configs/"]
+COPY ["./src/BookStore.OrderService.Contracts/*.csproj", "./BookStore.OrderService.Contracts/"]
+COPY ["./src/BookStore.OrderService.Data/*.csproj", "./BookStore.OrderService.Data/"]
+COPY ["./src/BookStore.OrderService.IntegrationTests/*.csproj", "./BookStore.OrderService.IntegrationTests/"]
+COPY ["./src/BookStore.OrderService.Settings/*.csproj", "./BookStore.OrderService.Settings/"]
+COPY ["./src/BookStore.OrderService.WebEntryPoint/*.csproj", "./BookStore.OrderService.WebEntryPoint/"]
+
+RUN dotnet nuget add source $BASE_NUGET_SOURCE_INDEX_URI --name $BASE_NUGET_SOURCE_NAME --username $BASE_NUGET_SOURCE_USER_NAME --password $BASE_NUGET_SOURCE_AUTH_TOKEN --store-password-in-clear-text
+RUN dotnet nuget add source $AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI --name $AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME --username $AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME --password $AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN --store-password-in-clear-text
+
+RUN dotnet restore /src/BookStore.OrderService.sln
+
+COPY ["./src/.", "./"]
+WORKDIR /src/BookStore.OrderService.AppEntryPoint
+RUN dotnet publish -c release -o /published --no-restore
+
+#__Release
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
+
+ARG ENVIRONMENT
+
+ARG BOOK_STORE_SWAGGER_UI_CLIENT_ID
+ARG BOOK_STORE_SWAGGER_UI_CLIENT_SECRET
+
+ARG ORDER_SERVICE_BASE_DATABASE_CONNECTION_STRING
+
+ARG MASSTRANSIT_URI
+ARG MASSTRANSIT_HOST
+ARG MASSTRANSIT_USER_NAME
+ARG MASSTRANSIT_PASSWORD
+
+ARG AUTHORIZATION_SERVICE_ISSUER
+ARG AUTHORIZATION_SERVICE_TOKEN_URI
+ARG AUTHORIZATION_SERVICE_SIGN_IN_URI
+
+ENV ASPNETCORE_ENVIRONMENT=$ENVIRONMENT
+ENV ASPNETCORE_URLS="http://+:80"
+
+ENV APP_CONFIG__ENVIRONMENT=$ENVIRONMENT
+
+ENV LOG_CONFIG__LOG_FILE_PATH="./logs/book-store.order-service.txt"
+ENV LOG_CONFIG__OUTPUT_TEMPLATE="{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [{SourceContext:l}] {Message}{NewLine}{Exception}"
+
+ENV AUTHORIZATION_SERVICE_CONFIG__ISSUER=$AUTHORIZATION_SERVICE_ISSUER
+ENV AUTHORIZATION_SERVICE_CONFIG__TOKEN_URI=$AUTHORIZATION_SERVICE_TOKEN_URI
+ENV AUTHORIZATION_SERVICE_CONFIG__SIGN_IN_URI=$AUTHORIZATION_SERVICE_SIGN_IN_URI
+
+ENV SWAGGER_CONFIG__UI__CLIENT_ID=$BOOK_STORE_SWAGGER_UI_CLIENT_ID
+ENV SWAGGER_CONFIG__UI__CLIENT_SECRET=$BOOK_STORE_SWAGGER_UI_CLIENT_SECRET
+
+ENV BASE_DATABASE_CONFIG__CONNECTION_STRING=$ORDER_SERVICE_BASE_DATABASE_CONNECTION_STRING
+
+ENV MASSTRANSIT_CONFIG__URI=$MASSTRANSIT_URI
+ENV MASSTRANSIT_CONFIG__HOST=$MASSTRANSIT_HOST
+ENV MASSTRANSIT_CONFIG__USER_NAME=$MASSTRANSIT_USER_NAME
+ENV MASSTRANSIT_CONFIG__PASSWORD=$MASSTRANSIT_PASSWORD
+
+
+# ENV ASPNETCORE_ENVIRONMENT="Development"
+# ENV ASPNETCORE_URLS="http://+:80"
+
+# ENV SWAGGERUI_CLIENT_ID="SwaggerUI"
+# ENV SWAGGERUI_CLIENT_SECRET="KmsleOF322(@4msl!!ols"
+
+# ENV CLIENT_ID="BookStore.OrderServiceApi"
+# ENV CLIENT_SECRET="Lask21@!283LSrut"
+
+# ENV MASSTRANSIT_HOST="book-store"
+# ENV MASSTRANSIT_USER_NAME="BookStore"
+# ENV MASSTRANSIT_PASSWORD="KJiwjd2*12asl!"
+
+# ENV USERSERVICE_ENDPOINTS_READPROFILE_PATH="/user-service/api/v1/profiles/profile"
+#___________________________
+WORKDIR /BookStore.OrderService
+COPY --from=build /published ./
+ENTRYPOINT ["dotnet", "BookStore.OrderService.AppEntryPoint.dll"]

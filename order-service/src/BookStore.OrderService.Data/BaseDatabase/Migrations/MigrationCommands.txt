@@ -1,0 +1,7 @@
+﻿//История стеком.
+//Переменные окружения из launchSettings не возьмутся при запуске из под efcore
+//Design-time переменная: $ENV:BASE_DB_CONNECTION_STRING_DESIGN_TIME=
+//dotnet ef database update -s ./BookStore.OrderService.AppEntryPoint/BookStore.OrderService.AppEntryPoint.csproj -p ./BookStore.OrderService.Data/BookStore.OrderService.Data.csproj --context BaseDbContext
+___________________________________
+dotnet ef migrations add Initial -s ./BookStore.OrderService.AppEntryPoint/BookStore.OrderService.AppEntryPoint.csproj -p ./BookStore.OrderService.Data/BookStore.OrderService.Data.csproj --context BaseDbContext -o ./BaseDatabase/Migrations
+___________________________________

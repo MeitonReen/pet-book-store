@@ -1,0 +1,44 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "book-store.authorization-service",
+      "Config": [
+        {
+          "Name": "BookStore.AuthorizationService",
+          "Version": "v1.0.0",
+          "Url": "<FromEnvironment>"
+        }
+      ]
+    },
+    {
+      "Key": "book-store.book-service",
+      "Config": [
+        {
+          "Name": "BookStore.BookService",
+          "Version": "v1.0.0",
+          "Url": "<FromEnvironment>"
+        }
+      ]
+    },
+    {
+      "Key": "book-store.user-service",
+      "Config": [
+        {
+          "Name": "BookStore.UserService",
+          "Version": "v1.0.0",
+          "Url": "<FromEnvironment>"
+        }
+      ]
+    },
+    {
+      "Key": "book-store.order-service",
+      "Config": [
+        {
+          "Name": "BookStore.OrderService",
+          "Version": "v1.0.0",
+          "Url": "<FromEnvironment>"
+        }
+      ]
+    }
+  ]
+}

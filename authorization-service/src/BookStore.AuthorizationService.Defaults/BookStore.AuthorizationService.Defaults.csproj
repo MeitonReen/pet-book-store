@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Authors>MeitonReen</Authors>
+        <PackageTags>book store, bookstore</PackageTags>
+        <PackageProjectUrl></PackageProjectUrl>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+        <PackageVersion>1.0.6</PackageVersion>
+    </PropertyGroup>
+
+    <!--    <PropertyGroup>-->
+    <!--        <Environment>Development</Environment>-->
+    <!--        <Environment Condition="'$(ASPNETCORE_ENVIRONMENT)' != ''">$(ASPNETCORE_ENVIRONMENT)</Environment>-->
+    <!--    </PropertyGroup>-->
+    <Target Name="PushToFeed" AfterTargets="Pack">
+        <Exec Condition="'$(Configuration)'=='DEBUG'" Command="dotnet nuget push &quot;$(SolutionDir)nugets\$(PackageId).$(PackageVersion).nupkg&quot; &#45;&#45;source BookStoreAuthorizationServicePackageRegistry"/>
+    </Target>
+
+    <!--    <Target Name="PushToFeed" AfterTargets="Pack">-->
+    <!--    </Target>-->
+</Project>

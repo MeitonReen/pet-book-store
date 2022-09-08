@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>77ad9371-d7c8-4a99-91d5-4c936d9ae546</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="FluentValidation" Version="11.2.1" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+        <PackageReference Include="OpenIddict.Quartz" Version="3.1.1" />
+        <PackageReference Include="Quartz" Version="3.4.0" />
+        <PackageReference Include="Quartz.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.1.1" />
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.8" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.AuthorizationService.Configs\BookStore.AuthorizationService.Configs.csproj" />
+        <ProjectReference Include="..\BookStore.AuthorizationService.Contracts\BookStore.AuthorizationService.Contracts.csproj" />
+        <ProjectReference Include="..\BookStore.AuthorizationService.Data\BookStore.AuthorizationService.Data.csproj" />
+        <ProjectReference Include="..\BookStore.AuthorizationService.WebEntryPoint\BookStore.AuthorizationService.WebEntryPoint.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="DefaultAppSettings\appsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="DefaultAppSettings\appsettings.Development.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

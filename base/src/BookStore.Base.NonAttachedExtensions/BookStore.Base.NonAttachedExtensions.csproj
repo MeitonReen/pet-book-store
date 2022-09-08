@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Authors>MeitonReen</Authors>
+        <PackageTags>book store, bookstore, base</PackageTags>
+        <PackageProjectUrl></PackageProjectUrl>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.0.6" />
+        <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
+        <PackageReference Include="MassTransit" Version="8.0.6" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+        <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+        <PackageVersion>1.0.30</PackageVersion>
+    </PropertyGroup>
+
+    <Target Name="PushToFeed" AfterTargets="Pack">
+        <Exec Command="dotnet nuget push &quot;$(SolutionDir)nugets\$(PackageId).$(PackageVersion).nupkg&quot; --source BookStoreBasePackageRegistry" />
+    </Target>
+
+</Project>

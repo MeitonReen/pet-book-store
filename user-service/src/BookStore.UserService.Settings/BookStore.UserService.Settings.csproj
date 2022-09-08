@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>5211a912-0927-4086-8363-5c5596ef4d5c</UserSecretsId>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="BookStore.Base.DefaultConfigs" Version="1.0.18" />
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.179" />
+        <PackageReference Include="BookStore.Base.InterserviceContracts" Version="1.0.43" />
+        <PackageReference Include="MassTransit.Quartz" Version="8.0.6" />
+        <PackageReference Include="Quartz.Serialization.Json" Version="3.4.0" />
+        <PackageReference Include="Quartz" Version="3.4.0" />
+        <PackageReference Include="BookStore.AuthorizationService.Defaults" Version="1.0.6" />
+        <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
+        <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+        <PackageReference Include="Minio" Version="4.0.5" />
+        <PackageReference Include="Minio.AspNetCore" Version="4.0.5" />
+        <PackageReference Include="OpenIddict.Abstractions" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.Validation" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="3.1.1" />
+        <PackageReference Include="Serilog" Version="2.11.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0" />
+        <PackageReference Include="AutoMapper" Version="11.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
+        <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+        <PackageReference Include="FluentValidation" Version="11.2.1" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.UserService.BL\BookStore.UserService.BL.csproj" />
+        <ProjectReference Include="..\BookStore.UserService.Contracts\BookStore.UserService.Contracts.csproj" />
+        <ProjectReference Include="..\BookStore.UserService.Data\BookStore.UserService.Data.csproj" />
+        <ProjectReference Include="..\BookStore.UserService.Configs\BookStore.UserService.Configs.csproj" />
+        <ProjectReference Include="..\BookStore.UserService.WebEntryPoint\BookStore.UserService.WebEntryPoint.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="DefaultAppSettings\appsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="DefaultAppSettings\appsettings.Development.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

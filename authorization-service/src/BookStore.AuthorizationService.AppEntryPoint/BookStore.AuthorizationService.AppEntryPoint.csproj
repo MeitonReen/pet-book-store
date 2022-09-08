@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+        <PackageReference Include="OpenIddict.Quartz" Version="3.1.1" />
+        <PackageReference Include="Quartz" Version="3.4.0" />
+        <PackageReference Include="Quartz.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.1.1" />
+        <PackageReference Include="Serilog" Version="2.11.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.AuthorizationService.Settings\BookStore.AuthorizationService.Settings.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.351014d6.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.351014d6.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.6fe835d6.chunk.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.6fe835d6.chunk.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.711a5df8.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.711a5df8.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.711a5df8.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a5068763.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a5068763.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a5068763.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.b174a71f.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.b174a71f.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.404b3ba4.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.404b3ba4.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.404b3ba4.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.2d9e9589.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.2d9e9589.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.c04c7c73.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.c04c7c73.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.c04c7c73.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.2fc49f71.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.2fc49f71.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.07f56f73.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.07f56f73.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.07f56f73.js.map" />
+    </ItemGroup>
+</Project>

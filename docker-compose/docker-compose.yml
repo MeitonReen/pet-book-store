@@ -1,0 +1,267 @@
+version: "3.8"
+volumes:
+  database-volume:
+  message-broker-volume:
+    # minio-volume:
+    # redis-volume:
+services:
+  book-store.database:
+    build:
+      context: "./../database"
+    image: "book-store.database"
+    container_name: "book-store.database"
+    volumes:
+      - type: "volume"
+        source: "database-volume"
+        target: "${PGDATA}"
+    ports:
+      - "5550:${DEFAULT_DATABASE_PORT}"
+
+  book-store.message-broker:
+    hostname: "message-broker"
+    build: 
+      context: "./../message-broker"
+    image: "book-store.message-broker"
+    container_name: "book-store.message-broker"
+    volumes:
+      - type: "volume"
+        source: "message-broker-volume"
+        target: "${RABBITMQ_DATA_BASE_PATH}"
+    ports:
+      - "15773:${DEFAULT_MESSAGE_BROKER_PORT}"
+  book-store.api-gateway:
+    build:
+      context: "./../api-gateway"
+      args:
+        - "BASE_NUGET_SOURCE_INDEX_URI=${BASE_NUGET_SOURCE_INDEX_URI}"
+        - "BASE_NUGET_SOURCE_NAME=${BASE_NUGET_SOURCE_NAME}"
+        - "BASE_NUGET_SOURCE_USER_NAME=${BASE_NUGET_SOURCE_USER_NAME}"
+        - "BASE_NUGET_SOURCE_AUTH_TOKEN=${BASE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI=${AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN=${AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "ENVIRONMENT=${ENVIRONMENT}"
+
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_ID=${BOOK_STORE_SWAGGER_UI_CLIENT_ID}"
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_SECRET=${BOOK_STORE_SWAGGER_UI_CLIENT_SECRET}"
+
+        - "AUTHORIZATION_SERVICE_URI=http://book-store.authorization-service"
+        - "BOOK_SERVICE_URI=http://book-store.book-service"
+        - "USER_SERVICE_URI=http://book-store.user-service"
+        - "ORDER_SERVICE_URI=http://book-store.order-service"
+
+        - "BOOK_STORE_EXTERNAL_URI=${BOOK_STORE_EXTERNAL_URI}"
+    image: "book-store.api-gateway"
+    container_name: "book-store.api-gateway"
+    ports:
+      - "${BOOK_STORE_EXTERNAL_PORT}:80"
+    depends_on:
+      - "book-store.user-service"
+      - "book-store.book-service"
+      - "book-store.order-service"
+
+  book-store.authorization-service:
+    build:
+      context: "./../authorization-service"
+      args:
+        - "REACT_APP_CONSENT_PAGE_LOCAL_URI=${REACT_APP_CONSENT_PAGE_LOCAL_URI}"
+        - "REACT_APP_SIGN_UP_PAGE_LOCAL_URI=${REACT_APP_SIGN_UP_PAGE_LOCAL_URI}"
+        - "REACT_APP_SIGN_IN_PAGE_LOCAL_URI=${REACT_APP_SIGN_IN_PAGE_LOCAL_URI}"
+        - "REACT_APP_OP_AUTHORIZE_ENDPOINT_URI=${REACT_APP_OP_AUTHORIZE_ENDPOINT_URI}"
+        - "REACT_APP_OP_ACCOUNT_ENDPOINT_URI=${REACT_APP_OP_ACCOUNT_ENDPOINT_URI}"
+
+        - "BASE_NUGET_SOURCE_INDEX_URI=${BASE_NUGET_SOURCE_INDEX_URI}"
+        - "BASE_NUGET_SOURCE_NAME=${BASE_NUGET_SOURCE_NAME}"
+        - "BASE_NUGET_SOURCE_USER_NAME=${BASE_NUGET_SOURCE_USER_NAME}"
+        - "BASE_NUGET_SOURCE_AUTH_TOKEN=${BASE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI=${AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN=${AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "ENVIRONMENT=${ENVIRONMENT}"
+
+        - "DEFAULT_PATH_TO_SWAGGER_UI_ACF_REDIRECT=${DEFAULT_PATH_TO_SWAGGER_UI_ACF_REDIRECT}"
+
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_ID=${BOOK_STORE_SWAGGER_UI_CLIENT_ID}"
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_SECRET=${BOOK_STORE_SWAGGER_UI_CLIENT_SECRET}"
+
+        - "AUTHORIZATION_SERVICE_BASE_DATABASE_CONNECTION_STRING=${AUTHORIZATION_SERVICE_BASE_DATABASE_CONNECTION_STRING}"
+        - "AUTHORIZATION_SERVICE_ISSUER=${AUTHORIZATION_SERVICE_ISSUER}"
+        - "AUTHORIZATION_SERVICE_TOKEN_URI=${AUTHORIZATION_SERVICE_TOKEN_URI}"
+        - "AUTHORIZATION_SERVICE_SIGN_IN_URI=${AUTHORIZATION_SERVICE_SIGN_IN_URI}"
+
+        - "SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}"
+        - "ADMIN_PASSWORD=${ADMIN_PASSWORD}"
+        - "TEST_DEFAULT_USER=${TEST_DEFAULT_USER}"
+
+        - "BOOK_STORE_EXTERNAL_URI=${BOOK_STORE_EXTERNAL_URI}"
+
+        - "AUTHORIZATION_SERVICE_EXTERNAL_URI=${AUTHORIZATION_SERVICE_EXTERNAL_URI}"
+        - "BOOK_SERVICE_EXTERNAL_URI=${BOOK_SERVICE_EXTERNAL_URI}"
+        - "USER_SERVICE_EXTERNAL_URI=${USER_SERVICE_EXTERNAL_URI}"
+        - "ORDER_SERVICE_EXTERNAL_URI=${ORDER_SERVICE_EXTERNAL_URI}"
+    image: "book-store.authorization-service"
+    container_name: "book-store.authorization-service"
+    ports:
+      - "${AUTHORIZATION_SERVICE_EXTERNAL_PORT}:80"
+    depends_on:
+      - "book-store.database"
+      - "book-store.message-broker"
+
+  book-store.book-service:
+    build:
+      context: "./../book-service"
+      args:
+        - "BASE_NUGET_SOURCE_INDEX_URI=${BASE_NUGET_SOURCE_INDEX_URI}"
+        - "BASE_NUGET_SOURCE_NAME=${BASE_NUGET_SOURCE_NAME}"
+        - "BASE_NUGET_SOURCE_USER_NAME=${BASE_NUGET_SOURCE_USER_NAME}"
+        - "BASE_NUGET_SOURCE_AUTH_TOKEN=${BASE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI=${AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN=${AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "ENVIRONMENT=${ENVIRONMENT}"
+
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_ID=${BOOK_STORE_SWAGGER_UI_CLIENT_ID}"
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_SECRET=${BOOK_STORE_SWAGGER_UI_CLIENT_SECRET}"
+
+        - "BOOK_SERVICE_BASE_DATABASE_CONNECTION_STRING=${BOOK_SERVICE_BASE_DATABASE_CONNECTION_STRING}"
+        - "BOOK_SERVICE_SAGAS_DATABASE_CONNECTION_STRING=${BOOK_SERVICE_SAGAS_DATABASE_CONNECTION_STRING}"
+
+        - "MASSTRANSIT_URI=book-store.message-broker"
+        - "MASSTRANSIT_HOST=${MASSTRANSIT_HOST}"
+        - "MASSTRANSIT_USER_NAME=${MASSTRANSIT_USER_NAME}"
+        - "MASSTRANSIT_PASSWORD=${MASSTRANSIT_PASSWORD}"
+
+        - "AUTHORIZATION_SERVICE_ISSUER=${AUTHORIZATION_SERVICE_ISSUER}"
+        - "AUTHORIZATION_SERVICE_TOKEN_URI=${AUTHORIZATION_SERVICE_TOKEN_URI}"
+        - "AUTHORIZATION_SERVICE_SIGN_IN_URI=${AUTHORIZATION_SERVICE_SIGN_IN_URI}"
+    image: "book-store.book-service"
+    container_name: "book-store.book-service"
+    ports:
+      - "${BOOK_SERVICE_EXTERNAL_PORT}:80"
+    depends_on:
+      - "book-store.database"
+      - "book-store.message-broker"
+      - "book-store.authorization-service"
+      # - "book-store.object-storage-service"
+      # - "book-store.cache-service"
+
+  book-store.user-service:
+    build:
+      context: "./../user-service"
+      args:
+        - "BASE_NUGET_SOURCE_INDEX_URI=${BASE_NUGET_SOURCE_INDEX_URI}"
+        - "BASE_NUGET_SOURCE_NAME=${BASE_NUGET_SOURCE_NAME}"
+        - "BASE_NUGET_SOURCE_USER_NAME=${BASE_NUGET_SOURCE_USER_NAME}"
+        - "BASE_NUGET_SOURCE_AUTH_TOKEN=${BASE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI=${AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN=${AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "ENVIRONMENT=${ENVIRONMENT}"
+
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_ID=${BOOK_STORE_SWAGGER_UI_CLIENT_ID}"
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_SECRET=${BOOK_STORE_SWAGGER_UI_CLIENT_SECRET}"
+
+        - "USER_SERVICE_BASE_DATABASE_CONNECTION_STRING=${USER_SERVICE_BASE_DATABASE_CONNECTION_STRING}"
+        - "USER_SERVICE_SAGAS_DATABASE_CONNECTION_STRING=${USER_SERVICE_SAGAS_DATABASE_CONNECTION_STRING}"
+
+        - "MASSTRANSIT_URI=book-store.message-broker"
+        - "MASSTRANSIT_HOST=${MASSTRANSIT_HOST}"
+        - "MASSTRANSIT_USER_NAME=${MASSTRANSIT_USER_NAME}"
+        - "MASSTRANSIT_PASSWORD=${MASSTRANSIT_PASSWORD}"
+
+        - "AUTHORIZATION_SERVICE_ISSUER=${AUTHORIZATION_SERVICE_ISSUER}"
+        - "AUTHORIZATION_SERVICE_TOKEN_URI=${AUTHORIZATION_SERVICE_TOKEN_URI}"
+        - "AUTHORIZATION_SERVICE_SIGN_IN_URI=${AUTHORIZATION_SERVICE_SIGN_IN_URI}"
+    image: "book-store.user-service"
+    container_name: "book-store.user-service"
+    ports:
+      - "${USER_SERVICE_EXTERNAL_PORT}:80"
+    depends_on:
+      - "book-store.database"
+      - "book-store.message-broker"
+      - "book-store.authorization-service"
+      # - "book-store.cache-service"
+
+  book-store.order-service:
+    build:
+      context: "./../order-service"
+      args:
+        - "BASE_NUGET_SOURCE_INDEX_URI=${BASE_NUGET_SOURCE_INDEX_URI}"
+        - "BASE_NUGET_SOURCE_NAME=${BASE_NUGET_SOURCE_NAME}"
+        - "BASE_NUGET_SOURCE_USER_NAME=${BASE_NUGET_SOURCE_USER_NAME}"
+        - "BASE_NUGET_SOURCE_AUTH_TOKEN=${BASE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI=${AUTHORIZATION_SERVICE_NUGET_SOURCE_INDEX_URI}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME=${AUTHORIZATION_SERVICE_NUGET_SOURCE_USER_NAME}"
+        - "AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN=${AUTHORIZATION_SERVICE_NUGET_SOURCE_AUTH_TOKEN}"
+
+        - "ENVIRONMENT=${ENVIRONMENT}"
+
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_ID=${BOOK_STORE_SWAGGER_UI_CLIENT_ID}"
+        - "BOOK_STORE_SWAGGER_UI_CLIENT_SECRET=${BOOK_STORE_SWAGGER_UI_CLIENT_SECRET}"
+
+        - "ORDER_SERVICE_BASE_DATABASE_CONNECTION_STRING=${ORDER_SERVICE_BASE_DATABASE_CONNECTION_STRING}"
+
+        - "MASSTRANSIT_URI=book-store.message-broker"
+        - "MASSTRANSIT_HOST=${MASSTRANSIT_HOST}"
+        - "MASSTRANSIT_USER_NAME=${MASSTRANSIT_USER_NAME}"
+        - "MASSTRANSIT_PASSWORD=${MASSTRANSIT_PASSWORD}"
+
+        - "AUTHORIZATION_SERVICE_ISSUER=${AUTHORIZATION_SERVICE_ISSUER}"
+        - "AUTHORIZATION_SERVICE_TOKEN_URI=${AUTHORIZATION_SERVICE_TOKEN_URI}"
+        - "AUTHORIZATION_SERVICE_SIGN_IN_URI=${AUTHORIZATION_SERVICE_SIGN_IN_URI}"
+    image: "book-store.order-service"
+    container_name: "book-store.order-service"
+    ports:
+      - "${ORDER_SERVICE_EXTERNAL_PORT}:80"
+    depends_on:
+      - "book-store.database"
+      - "book-store.message-broker"
+      - "book-store.authorization-service"
+      # - "book-store.cache-service"
+
+  
+
+  # book-store.cache-service:
+  #   build:
+  #     context: "./../cache-service"
+  #   image: "book-store.cache-service"
+  #   container_name: "book-store.cache-service"
+  #   volumes:
+  #     - type: "volume"
+  #       source: "redis-volume"
+  #       target: "${REDIS_TARGET_DATA}"
+  #   ports:
+  #     - "${REDIS_EXTERNAL_PORT}:6379"
+  #   environment:
+  #     - "REDIS_PASSWORD=${REDIS_PASSWORD}"
+  # book-store.object-storage-service: #change to object storage
+  #   hostname: minio
+  #   build:
+  #     context: "./../object-storage-service"
+  #     args:
+  #     - "MINIO_TARGET_DATA=${MINIO_TARGET_DATA}"
+  #   image: "book-store.object-storage-service"
+  #   container_name: "book-store.object-storage-service"
+  #   volumes:
+  #     - type: "volume"
+  #       source: "minio-volume"
+  #       target: "${MINIO_TARGET_DATA}"
+  #   ports:
+  #     - "${MINIO_EXTERNAL_PORT}:9000"
+  #     - "${MINIO_CONSOLE_EXTERNAL_PORT}:9001"
+  #   environment:
+  #     - "MINIO_TARGET_DATA=${MINIO_TARGET_DATA}"

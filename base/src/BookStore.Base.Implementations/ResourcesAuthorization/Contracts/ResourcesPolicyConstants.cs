@@ -1,0 +1,74 @@
+﻿namespace BookStore.Base.Implementations.ResourcesAuthorization.Contracts;
+
+public static class ResourcesPolicyConstants
+{
+    public const string Or = "|Or|";
+    public const string And = "|And|";
+
+    public const string ValueRegexSelector = @"[a-z0-9\-]+\.[crud]{1,4}";
+
+    public const string CRUD = "crud";
+    public const string CRDU = "crdu";
+    public const string CURD = "curd";
+    public const string CUDR = "cudr";
+    public const string CDRU = "cdru";
+    public const string CDUR = "cdur";
+    public const string RCUD = "rcud";
+    public const string RCDU = "rcdu";
+    public const string RUCD = "rucd";
+    public const string RUDC = "rudc";
+    public const string RDCU = "rdcu";
+    public const string RDUC = "rduc";
+    public const string UCRD = "ucrd";
+    public const string UCDR = "ucdr";
+    public const string URCD = "urcd";
+    public const string URDC = "urdc";
+    public const string UDCR = "udcr";
+    public const string UDRC = "udrc";
+    public const string DCRU = "dcru";
+    public const string DCUR = "dcur";
+    public const string DRCU = "drcu";
+    public const string DRUC = "druc";
+    public const string DUCR = "ducr";
+    public const string DURC = "durc";
+    public const string CRU = "cru";
+    public const string CRD = "crd";
+    public const string CUR = "cur";
+    public const string CUD = "cud";
+    public const string CDR = "cdr";
+    public const string CDU = "cdu";
+    public const string RCU = "rcu";
+    public const string RCD = "rcd";
+    public const string RUC = "ruc";
+    public const string RUD = "rud";
+    public const string RDC = "rdc";
+    public const string RDU = "rdu";
+    public const string UCR = "ucr";
+    public const string UCD = "ucd";
+    public const string URC = "urc";
+    public const string URD = "urd";
+    public const string UDC = "udc";
+    public const string UDR = "udr";
+    public const string DCR = "dcr";
+    public const string DCU = "dcu";
+    public const string DRC = "drc";
+    public const string DRU = "dru";
+    public const string DUC = "duc";
+    public const string DUR = "dur";
+    public const string CR = "cr";
+    public const string CU = "cu";
+    public const string CD = "cd";
+    public const string RC = "rc";
+    public const string RU = "ru";
+    public const string RD = "rd";
+    public const string UC = "uc";
+    public const string UR = "ur";
+    public const string UD = "ud";
+    public const string DC = "dc";
+    public const string DR = "dr";
+    public const string DU = "du";
+    public const string C = "c";
+    public const string R = "r";
+    public const string U = "u";
+    public const string D = "d";
+}

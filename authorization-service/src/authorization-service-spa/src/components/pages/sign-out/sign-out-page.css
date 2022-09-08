@@ -1,0 +1,23 @@
+.sign-out-page {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.sign-out-page__body {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    justify-items: center;
+    row-gap: 1rem;
+}
+
+.sign-out-page__title {
+    margin: 0;
+}
+
+.sign-out-page__sign-out-button {
+    width: min-content;
+}

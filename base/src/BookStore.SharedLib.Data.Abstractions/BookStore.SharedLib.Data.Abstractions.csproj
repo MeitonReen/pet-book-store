@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Authors>MeitonReen</Authors>
+        <PackageTags>book store, bookstore, sharedlib</PackageTags>
+        <PackageProjectUrl></PackageProjectUrl>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <LangVersion>10</LangVersion>
+        <RootNamespace>BookStore.SharedLib.Abstractions</RootNamespace>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+        <PackageVersion>1.0.1</PackageVersion>
+    </PropertyGroup>
+
+    <Target Name="PushToFeed" AfterTargets="Pack">
+        <Exec Command="dotnet nuget push &quot;$(SolutionDir)nugets\$(PackageId).$(PackageVersion).nupkg&quot; --source SharedLibPackageRegistry" />
+    </Target>
+    
+</Project>

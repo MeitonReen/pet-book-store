@@ -1,0 +1,60 @@
+{
+    "rabbit_version": "3.9.11",
+    "rabbitmq_version": "3.9.11",
+    "product_name": "RabbitMQ",
+    "product_version": "3.9.11",
+    "users": [
+        {
+            "name": "Admin",
+            "password_hash": "B7NN/Y0VOciq8eLhslEfkWTJ/kng4Jy6U5fRVlv+Wkjuia0X",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": [
+                "administrator"
+            ],
+            "limits": {}
+        },
+        {
+            "name": "BookStore",
+            "password_hash": "MQlFQKbBXHHmxjdaKX4CJHG206ItV8My+vrWMnpDRAqvhIjs",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": [
+                "administrator"
+            ],
+            "limits": {}
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        },
+        {
+            "name": "book-store"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "Admin",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "Admin",
+            "vhost": "book-store",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "BookStore",
+            "vhost": "book-store",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "topic_permissions": [],
+    "parameters": [],
+    "policies": []
+}

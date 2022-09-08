@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/ocelot.json",
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/book-rating/v1.0.0",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Patch",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/book-rating/v1.0.0",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "<Host and port from environment>",
+          "Port": 7187
+        }
+      ],
+      "SwaggerKey": "book-store.user-service"
+    }
+  ]
+}

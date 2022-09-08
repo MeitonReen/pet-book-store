@@ -1,0 +1,8 @@
+﻿//История стеком.
+//migrations add -o <output path> - из корня проекта.
+//Переменные окружения в launchSettings не подтянутся при запуске из под efcore,
+//установить ручками: $ENV:DATABASE_CONNECTION_STRING="<envParamValue>"
+//dotnet ef database update -s ./BookStore.AuthorizationService.Web/BookStore.AuthorizationService.Web.csproj -p ./BookStore.AuthorizationService.Data/BookStore.AuthorizationService.Data.csproj --context DataContext
+___________________________________
+dotnet ef migrations add Initial -s ./BookStore.AuthorizationService.Web/BookStore.AuthorizationService.Web.csproj -p ./BookStore.AuthorizationService.Data/BookStore.AuthorizationService.Data.csproj --context DataContext -o ./Migrations
+___________________________________

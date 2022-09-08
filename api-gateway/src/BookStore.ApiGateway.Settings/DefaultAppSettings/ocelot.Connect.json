@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/ocelot.json",
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/connect/v1.0.0/token",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/connect/v1.0.0/token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "<Host and port from environment>",
+          "Port": 7893
+        }
+      ],
+      "SwaggerKey": "book-store.authorization-service"
+    },
+    {
+      "UpstreamPathTemplate": "/api/connect/v1.0.0/authorization",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/connect/v1.0.0/authorization",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "<Host and port from environment>",
+          "Port": 7893
+        }
+      ],
+      "SwaggerKey": "book-store.authorization-service"
+    }
+  ]
+}

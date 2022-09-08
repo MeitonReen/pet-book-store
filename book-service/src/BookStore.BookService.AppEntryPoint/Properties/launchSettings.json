@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:41155",
+      "sslPort": 44361
+    }
+  },
+  "profiles": {
+    "BookService": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:7186",
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:7186",
+        "APP_CONFIG__ENVIRONMENT": "Development",
+        "LOG_CONFIG__LOG_FILE_PATH": "./logs/book-store.book-service.txt",
+        "LOG_CONFIG__OUTPUT_TEMPLATE": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [{SourceContext:l}] {Message}{NewLine}{Exception}",
+        "MASSTRANSIT_CONFIG__URI": "localhost",
+        "MASSTRANSIT_CONFIG__HOST": "book-store",
+        "MASSTRANSIT_CONFIG__USER_NAME": "BookStore",
+        "AUTHORIZATION_SERVICE_CONFIG__ISSUER": "http://localhost:7893",
+        "AUTHORIZATION_SERVICE_CONFIG__TOKEN_URI": "http://localhost:7893/api/connect/v1.0.0/token",
+        "AUTHORIZATION_SERVICE_CONFIG__SIGN_IN_URI": "http://localhost:7893/account/sign-in",
+        "SWAGGER_CONFIG__UI__CLIENT_ID": "BookStore.SwaggerUi",
+        "MINIO_CONFIG__ENDPOINT": "localhost:9000",
+        "MINIO_CONFIG__ACCESS_KEY": "Admin",
+        "MINIO_CONFIG__SECRET_KEY": "Akwi@!@4j2",
+        "MINIO_CONFIG__DEFAULT_BUCKET_NAME": "dev-bucket",
+        "MINIO_CONFIG__IMAGES_BUCKET": "dev-bucket-images",
+        "MINIO_CONFIG__EXTERNAL_PORT": "9000",
+        "REDIS_CONFIG__ENDPOINT": "localhost:6379",
+        "REDIS_CONFIG__PASSWORD": "12K@!98i12D"
+      }
+    }
+  }
+}

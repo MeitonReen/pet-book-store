@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Authors>MeitonReen</Authors>
+        <PackageTags>book store, bookstore, base</PackageTags>
+        <PackageProjectUrl></PackageProjectUrl>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Helpers\Caching\Implementations\**"/>
+        <Compile Remove="Helpers\Caching\Interface\**"/>
+        <EmbeddedResource Remove="Helpers\Caching\Implementations\**"/>
+        <EmbeddedResource Remove="Helpers\Caching\Interface\**"/>
+        <None Remove="Helpers\Caching\Implementations\**"/>
+        <None Remove="Helpers\Caching\Interface\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Linq.Async" Version="6.0.1"/>
+        <PackageReference Include="DynamicExpresso.Core" Version="2.13.0"/>
+        <PackageReference Include="IdentityModel" Version="6.0.0"/>
+        <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.0.6"/>
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Minio" Version="4.0.5"/>
+        <PackageReference Include="Npgsql" Version="6.0.6"/>
+        <PackageReference Include="OpenIddict.Abstractions" Version="3.1.1"/>
+        <PackageReference Include="StackExchange.Redis" Version="2.6.48"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.4.0"/>
+        <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.Base.Contracts.Abstractions\BookStore.Base.Contracts.Abstractions.csproj"/>
+        <ProjectReference Include="..\BookStore.Base.Contracts.Implementations\BookStore.Base.Contracts.Implementations.csproj"/>
+        <ProjectReference Include="..\BookStore.Base.InterserviceContracts\BookStore.Base.InterserviceContracts.csproj"/>
+        <ProjectReference Include="..\BookStore.Base.NonAttachedExtensions\BookStore.Base.NonAttachedExtensions.csproj"/>
+        <ProjectReference Include="..\BookStore.Base.DefaultConfigs\BookStore.Base.DefaultConfigs.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Result\Helpers"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+        <PackageVersion>1.0.179</PackageVersion>
+    </PropertyGroup>
+
+    <Target Name="PushToFeed" AfterTargets="Pack">
+        <Exec Command="dotnet nuget push &quot;$(SolutionDir)nugets\$(PackageId).$(PackageVersion).nupkg&quot; --source BookStoreBasePackageRegistry"/>
+    </Target>
+
+</Project>

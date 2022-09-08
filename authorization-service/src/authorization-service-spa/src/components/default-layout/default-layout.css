@@ -1,0 +1,80 @@
+.default-layout {
+    display: flex;
+    box-sizing: border-box;
+
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.default-layout__body {
+    display: grid;
+
+    grid-template-rows: repeat(3, auto);
+
+    grid-template-areas:
+        'default-layout__title'
+        'default-layout__content';
+}
+
+.default-layout__title {
+    grid-area: default-layout__title;
+    font-size: 1.35rem;
+}
+
+.default-layout__content {
+    grid-area: default-layout__content;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    margin: 2.94rem 0 0 0;
+}
+
+.custom-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 0;
+}
+
+.custom-checkbox+label {
+    display: inline-flex;
+    user-select: none;
+}
+
+.custom-checkbox+label::before {
+    content: '';
+    align-self: end;
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 0.09rem solid;
+    margin: 0 0.3rem 0.1rem 0;
+    border-radius: 0.06rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+}
+
+.custom-checkbox:checked+label::before {
+    background-color: #bbbbbb;
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20version%3D%221.1%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%3Cg%3E%0A%20%20%3Cpath%20d%3D%22m10.463%2010.643%206.6746%2037.522%22%20stroke-width%3D%224.0252%22%2F%3E%0A%20%20%3Cpath%20d%3D%22m11.545%206.404v45.099%22%20stroke-width%3D%224.0252%22%2F%3E%0A%20%20%3Cpath%20d%3D%22m12.5%2050%2025%2025%2050-50%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%2213%22%20style%3D%22paint-order%3Astroke%20fill%20markers%22%2F%3E%0A%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+}
+
+.custom-checkbox+label:hover::before {
+    cursor: pointer;
+}
+
+.custom-checkbox:checked+label:hover::before {
+    border-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.custom-checkbox:not(:checked)+label:hover::before {
+    border-color: #ffffff;
+}

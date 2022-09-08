@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Authors>MeitonReen</Authors>
+        <PackageTags>book store, bookstore, base</PackageTags>
+        <PackageProjectUrl></PackageProjectUrl>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.Base.Contracts.Abstractions\BookStore.Base.Contracts.Abstractions.csproj"/>
+    </ItemGroup>
+    
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+        <PackageVersion>1.0.0</PackageVersion>
+    </PropertyGroup>
+
+    <Target Name="PushToFeed" AfterTargets="Pack">
+        <Exec Command="dotnet nuget push &quot;$(SolutionDir)nugets\$(PackageId).$(PackageVersion).nupkg&quot; --source BookStoreBasePackageRegistry"/>
+    </Target>
+
+</Project>

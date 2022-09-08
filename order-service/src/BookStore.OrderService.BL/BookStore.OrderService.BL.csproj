@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="DataBusConsumers\**" />
+        <EmbeddedResource Remove="DataBusConsumers\**" />
+        <None Remove="DataBusConsumers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.179" />
+        <PackageReference Include="MassTransit" Version="8.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+        <PackageReference Include="Minio" Version="4.0.5" />
+        <PackageReference Include="Minio.AspNetCore" Version="4.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.OrderService.Contracts\BookStore.OrderService.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Resources\MyOrder\V1_0_0\Create" />
+    </ItemGroup>
+
+</Project>

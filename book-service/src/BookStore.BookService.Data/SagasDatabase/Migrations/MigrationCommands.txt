@@ -1,0 +1,7 @@
+﻿//История стеком.
+//Переменные окружения из launchSettings не возьмутся при запуске из под efcore
+//Design-time переменная: $ENV:SAGAS_DB_CONNECTION_STRING_DESIGN_TIME=
+//dotnet ef database update -s ./BookStore.BookService.AppEntryPoint/BookStore.BookService.AppEntryPoint.csproj -p ./BookStore.BookService.Data/BookStore.BookService.Data.csproj --context SagasDbContext
+___________________________________
+dotnet ef migrations add Initial -s ./BookStore.BookService.AppEntryPoint/BookStore.BookService.AppEntryPoint.csproj -p ./BookStore.BookService.Data/BookStore.BookService.Data.csproj --context SagasDbContext -o ./SagasDatabase/Migrations
+___________________________________

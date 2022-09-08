@@ -1,0 +1,37 @@
+.sign-up-page {
+    display: grid;
+    grid-auto-flow: row;
+    align-self: start;
+    align-items: center;
+    justify-items: start;
+}
+
+.sign-up-page__login-title {}
+
+.sign-up-page__login-input {
+    margin: 0.24rem 0 0 1.76rem;
+
+}
+
+.sign-up-page__password-title {
+    margin: 0.59rem 0 0 0;
+}
+
+.sign-up-page__password-input {
+    margin: 0.24rem 0 0 1.76rem;
+}
+
+.sign-up-page__confirm-password-title {
+    margin: 0.59rem 0 0 0;
+}
+
+.sign-up-page__confirm-password-input {
+    margin: 0.24rem 0 0 1.76rem;
+}
+
+.sign-up-page__sign-up-button {
+    justify-self: center;
+
+    margin: 0.6rem 0 0 1.76rem;
+    padding-bottom: 0.12rem;
+}

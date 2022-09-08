@@ -1,0 +1,35 @@
+.sign-in-page {
+    display: grid;
+    align-self: start;
+    grid-auto-flow: row;
+    box-sizing: border-box;
+    align-items: center;
+    justify-items: start;
+}
+
+.sign-in-page__login-title {
+}
+
+.sign-in-page__login-input {
+    margin: 0.24rem 0 0 1.76rem;
+}
+
+.sign-in-page__password-title {
+    margin: 0.59rem 0 0 0;
+}
+
+.sign-in-page__password-input {
+    margin: 0.24rem 0 0 1.76rem;
+}
+
+.sign-in-page__sign-in-button {
+    justify-self: center;
+
+    margin: 0.6rem 0 0 1.76rem;
+    padding-bottom: 0.12rem;
+}
+
+.sign-in-page__error-message {
+    color: #ff8888;
+    margin: 0.6rem 0 0 0;
+}

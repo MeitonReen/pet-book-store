@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="11.0.1"/>
+        <PackageReference Include="MassTransit.Abstractions" Version="8.0.6"/>
+        <PackageReference Include="BookStore.AuthorizationService.Defaults" Version="1.0.6"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BookStore.OrderService.BL\BookStore.OrderService.BL.csproj"/>
+        <ProjectReference Include="..\BookStore.OrderService.Contracts\BookStore.OrderService.Contracts.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Book\V1_0_0\Delete"/>
+    </ItemGroup>
+</Project>
