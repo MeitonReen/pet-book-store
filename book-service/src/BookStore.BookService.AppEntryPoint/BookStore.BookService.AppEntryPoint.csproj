@@ -13,7 +13,7 @@
         <PackageReference Include="BookStore.AuthorizationService.Defaults" Version="1.0.6" />
         <PackageReference Include="BookStore.Base.Contracts.Abstractions" Version="1.0.0" />
         <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.0" />
-        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.61" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
         <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />

@@ -62,6 +62,8 @@ public static class RootDiSettings
                 .Replace(Path.GetFileName(webControllersAssembly.Location), ""));
 
         services
+            .AddHealthChecks()
+            .Services
             .AddBlResources()
             .AddDefaultDatabaseSettings<SagasDbContext, Data.SagasDatabase.DatabaseInit.DatabaseInitRuntime,
                 SagasDatabaseConfig>(configuration)

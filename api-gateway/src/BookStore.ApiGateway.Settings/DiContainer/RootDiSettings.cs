@@ -35,6 +35,8 @@ public static class RootDiSettings
             .AddEndpointsApiExplorer()
             .AddOcelot()
             .Services
+            .AddHealthChecks()
+            .Services
             .AddSwaggerForOcelot(configuration)
             .AddSwaggerGen()
             .Configure<SwaggerForOcelotUIOptions>(sets =>

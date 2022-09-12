@@ -2,8 +2,9 @@ using BookStore.Base.DefaultSettings.ConfigurationManager;
 using BookStore.Base.DefaultSettings.Logger;
 using BookStore.Base.Implementations.DatabaseInit;
 using BookStore.BookService.Settings.DefaultAppSettings;
-using BookStore.BookService.Settings.DefaultRequestPipeline;
 using BookStore.BookService.Settings.DiContainer;
+using BookStore.BookService.Settings.RequestPipeline;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 var appBuilder = WebApplication.CreateBuilder(args);
 

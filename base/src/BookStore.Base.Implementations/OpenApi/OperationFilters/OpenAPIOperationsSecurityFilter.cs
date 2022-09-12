@@ -9,16 +9,16 @@ namespace BookStore.Base.Implementations.OpenApi.OperationFilters
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             bool existsAuthorizeAttribute = context.ApiDescription.CustomAttributes()
-                .Any(Attribute => Attribute.GetType() == typeof(AuthorizeAttribute));
+                .Any(attribute => attribute.GetType() == typeof(AuthorizeAttribute));
 
             bool existsAllowAnonymousAttribute = context.ApiDescription.CustomAttributes()
-                .Any(Attribute => Attribute.GetType() == typeof(AllowAnonymousAttribute));
+                .Any(attribute => attribute.GetType() == typeof(AllowAnonymousAttribute));
             ;
             if (!existsAuthorizeAttribute || existsAllowAnonymousAttribute)
             {
                 operation.Security = new List<OpenApiSecurityRequirement>
                 {
-                    new OpenApiSecurityRequirement()
+                    new()
                 };
                 //set: ""security": [{ }]"
             }

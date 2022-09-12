@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.0" />
-        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.61" />
         <PackageReference Include="BookStore.Base.InterserviceContracts" Version="1.0.43" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="MassTransit.Quartz" Version="8.0.6" />

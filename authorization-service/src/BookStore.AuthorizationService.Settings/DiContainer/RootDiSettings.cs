@@ -69,6 +69,8 @@ public static class RootDiSettings
             .AddCorsPolicySettings(defaultClientsConfig)
             .AddIdentityDatabaseSettings(configuration)
             .AddQuartzSettings()
+            .AddHealthChecks()
+            .Services
             .AddOpenIdDictSettings(authorizationServiceConfig)
             // .AddDefaultResourcesTools()
             .AddDefaultSwaggerSettings(authorizationServiceConfig, swaggerConfig, xmlDocName,

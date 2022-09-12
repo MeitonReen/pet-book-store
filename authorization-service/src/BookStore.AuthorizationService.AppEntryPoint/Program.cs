@@ -1,6 +1,6 @@
 using BookStore.AuthorizationService.Settings.DefaultAppSettings;
-using BookStore.AuthorizationService.Settings.DefaultRequestPipeline;
 using BookStore.AuthorizationService.Settings.DiContainer;
+using BookStore.AuthorizationService.Settings.RequestPipeline;
 using BookStore.Base.DefaultSettings.ConfigurationManager;
 using BookStore.Base.DefaultSettings.Logger;
 using BookStore.Base.Implementations.DatabaseInit;

@@ -67,13 +67,15 @@ public static class RootDiSettings
             .AddDefaultResourcesTools<BaseDbContext, DatabaseInitRuntime,
                 BaseDatabaseConfig>(configuration)
             .AddBlResources()
-            .AddDefaultSwaggerSettings(authorizationServiceConfig, swaggerConfig, xmlDocName,
+            .AddDefaultSwaggerSettings2(authorizationServiceConfig, swaggerConfig, xmlDocName,
                 xmlDocPath, typeof(Contracts.Helpers.TargetAssemblyType).Assembly)
             .AddAutoMapper(mapperAssembly)
             .AddDefaultFluentValidationSettings(validatorsAssembly)
             .AddMassTransitSettings(masstransitConfig)
             .AddHttpCorrelationId()
             .AddDefaultUserClaimsProfile()
+            .AddHealthChecks()
+            .Services
             .AddEndpointsApiExplorer()
             .AddControllers(sets => sets
                 .UseDateOnlyTimeOnlyStringConverters()) //Temp DateOnly support

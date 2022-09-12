@@ -1,7 +1,7 @@
 using BookStore.ApiGateway.Settings.DefaultAppSettings;
 using BookStore.ApiGateway.Settings.DefaultConfiguration;
-using BookStore.ApiGateway.Settings.DefaultRequestPipeline;
 using BookStore.ApiGateway.Settings.DiContainer;
+using BookStore.ApiGateway.Settings.RequestPipeline;
 using BookStore.Base.DefaultSettings.ConfigurationManager;
 using BookStore.Base.DefaultSettings.Logger;
 using MMLib.SwaggerForOcelot.DependencyInjection;
@@ -15,7 +15,7 @@ appBuilder.Configuration
     .ApplyDefaultLoggerSettings(appBuilder.Host)
     .ApplyDefaultApiGatewaySettings();
 
-Log.Information(appBuilder.Configuration.GetDebugView());
+// Log.Information(appBuilder.Configuration.GetDebugView());
 ;
 
 appBuilder.Services.AddDiSettings(appBuilder.Configuration);

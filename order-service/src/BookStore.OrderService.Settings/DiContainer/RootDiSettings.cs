@@ -71,6 +71,8 @@ public static class RootDiSettings
             .AddHttpContextAccessor()
             .AddMassTransitSettings(masstransitConfig)
             .AddHttpCorrelationId()
+            .AddHealthChecks()
+            .Services
             .AddDefaultUserClaimsProfile()
             .AddEndpointsApiExplorer()
             .AddControllers(sets => sets

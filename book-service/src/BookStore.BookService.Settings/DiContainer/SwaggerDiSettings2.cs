@@ -14,11 +14,11 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace BookStore.Base.DefaultSettings.DiContainer;
+namespace BookStore.BookService.Settings.DiContainer;
 
-public static class SwaggerDiSettings
+public static class SwaggerDiSettings2
 {
-    public static IServiceCollection AddDefaultSwaggerSettings(
+    public static IServiceCollection AddDefaultSwaggerSettings2(
         this IServiceCollection services,
         AuthorizationServiceConfig authorizationServiceConfig,
         SwaggerConfig swaggerConfig,
@@ -40,11 +40,11 @@ public static class SwaggerDiSettings
             })
             .AddMvc(sets => sets.Conventions.Add(new GroupingInSpecsByApiVersions()))
             .Services
-            .AddSwaggerGen(sets => sets.DefaultSwaggerSettings(authorizationServiceConfig,
+            .AddSwaggerGen(sets => sets.DefaultSwaggerSettings2(authorizationServiceConfig,
                 swaggerConfig.OpenApiDocs, xmlDocFileName, xmlDocPath));
     }
 
-    private static SwaggerGenOptions DefaultSwaggerSettings(
+    private static SwaggerGenOptions DefaultSwaggerSettings2(
         this SwaggerGenOptions sets,
         AuthorizationServiceConfig authorizationServiceConfig,
         OpenApiDocConfig[] openApiDocConfigs,

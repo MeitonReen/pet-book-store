@@ -7,7 +7,7 @@
         <UserSecretsId>3cb41b92-f001-467b-8b2f-29ff88ab60e4</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.58" />
+        <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.61" />
         <PackageReference Include="MassTransit.Quartz" Version="8.0.6" />
         <PackageReference Include="Quartz.Serialization.Json" Version="3.4.0" />
         <PackageReference Include="Quartz" Version="3.4.0" />
