@@ -9,6 +9,9 @@ using BookStore.OrderService.BL.ResourceEntities;
 using BookStore.OrderService.Contracts.Book.V1_0_0.Delete;
 using BookStore.OrderService.Contracts.Book.V1_0_0.Update;
 using BookStore.OrderService.Data.BaseDatabase;
+using BookStore.OrderService.Settings.Resources.Book.V1_0_0.Delete;
+using BookStore.OrderService.Settings.Resources.Book.V1_0_0.Update;
+using BookStore.OrderService.Settings.Resources.Profile.V1_0_0.Delete;
 using BookStore.OrderService.WebEntryPoint.Book.V1_0_0.Delete.MassTransitCourierActivities;
 using BookStore.OrderService.WebEntryPoint.Book.V1_0_0.Update.MassTransitCourierActivities;
 using BookStore.OrderService.WebEntryPoint.Profile.V1_0_0.Delete.MassTransitCourierActivities;
@@ -32,18 +35,12 @@ public static class MassTransitDiSettings
                 // var schedulerEndpoint = new Uri($"queue:{schedulerQueueName}");
                 //
                 // sets.AddMessageScheduler(schedulerEndpoint);
-                // sets.AddDefaultTransactionOutbox<BaseDbContext>();
-
-                // sets.AddConsumer<BookUpdatedMessageConsumer>();
-                // sets.AddConsumer<BookDeletedMessageConsumer>();
-                // sets.AddConsumer<ProfileDeletedConsumer>();
+                sets.AddDefaultTransactionOutbox<BaseDbContext>();
 
                 sets.AddActivity<UpdateBookCommandActivity, UpdateBookCommand,
                     UpdateBookCompensateCommand, UpdateBookCommandActivityDefinition>();
-
                 sets.AddActivity<DeleteBookCommandActivity, DeleteBookCommand,
                     DeleteBookCompensateCommand, DeleteBookCommandActivityDefinition>();
-
                 sets.AddActivity<DeleteProfileCommandActivity, DeleteProfileCommand, Profile,
                     DeleteProfileCommandActivityDefinition>();
 

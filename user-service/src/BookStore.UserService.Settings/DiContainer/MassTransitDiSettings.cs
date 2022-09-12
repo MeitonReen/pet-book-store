@@ -10,6 +10,10 @@ using BookStore.UserService.BL.ResourceEntities;
 using BookStore.UserService.Data.BaseDatabase;
 using BookStore.UserService.Data.Profile.V1_0_0.DeleteOut.SagaInstance;
 using BookStore.UserService.Data.SagasDatabase;
+using BookStore.UserService.Settings.Resources.Book.V1_0_0.Delete;
+using BookStore.UserService.Settings.Resources.Book.V1_0_0.DeleteOut;
+using BookStore.UserService.Settings.Resources.Profile.V1_0_0.Delete;
+using BookStore.UserService.Settings.Resources.ProfileExistence.V1_0_0.Read;
 using BookStore.UserService.WebEntryPoint.Book.V1_0_0.Delete.MassTransitCourierActivities;
 using BookStore.UserService.WebEntryPoint.Profile.V1_0_0.Delete.MassTransitCourierActivities;
 using BookStore.UserService.WebEntryPoint.Profile.V1_0_0.DeleteOut;
@@ -32,21 +36,23 @@ public static class MassTransitDiSettings
                 // var schedulerEndpoint = new Uri($"queue:{schedulerQueueName}");
                 //
                 // sets.AddMessageScheduler(schedulerEndpoint);
-                // sets.AddDefaultTransactionOutbox<BaseDbContext>();
+                sets.AddDefaultTransactionOutbox<BaseDbContext>();
                 sets.AddDefaultTransactionOutbox<SagasDbContext>();
 
-                sets.AddConsumer<ReadProfileExistenceRequestConsumer>();
+                sets.AddConsumer<ReadProfileExistenceRequestConsumer,
+                    ReadProfileExistenceRequestConsumerDefinition>();
 
                 sets.AddRequestClient<DeleteProfileRequest>();
 
                 sets.AddActivity<DeleteBookCommandActivity, DeleteBookCommand, Book,
                     DeleteBookCommandActivityDefinition>();
-
                 sets.AddActivity<DeleteProfileCommandActivity, DeleteProfileCommand,
                     Profile, DeleteProfileCommandActivityDefinition>();
 
-                sets.AddSagaStateMachine<SagaOrchestrator, SagaOrchestratorInstance,
-                    SagaOrchestratorInstanceDefinition>().EntityFrameworkRepository(efRepSets =>
+                sets
+                    .AddSagaStateMachine<SagaOrchestrator, SagaOrchestratorInstance,
+                    SagaOrchestratorDefinition>()
+                    .EntityFrameworkRepository(efRepSets =>
                 {
                     efRepSets.ConcurrencyMode = ConcurrencyMode.Optimistic;
                     efRepSets.UsePostgres();

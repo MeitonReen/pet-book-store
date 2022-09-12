@@ -11,7 +11,7 @@ public static class ConsumePipeConfiguratorExtensions
     {
         consumePipeConfigurator.UseMessageRetry(retrySets =>
         {
-            retrySets.Immediate(1);
+            retrySets.Intervals(100, 500);
 
             retrySets.Handle<DbUpdateConcurrencyException>();
 

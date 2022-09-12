@@ -1,5 +1,6 @@
 ﻿using BookStore.Base.Implementations.BaseResources.Inner;
 using BookStore.OrderService.BL.ResourceEntities;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.OrderService.Data.BaseDatabase
@@ -27,6 +28,17 @@ namespace BookStore.OrderService.Data.BaseDatabase
         // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            SchemeSettings(modelBuilder);
+
+            modelBuilder.AddInboxStateEntity();
+            modelBuilder.AddOutboxMessageEntity();
+            modelBuilder.AddOutboxStateEntity();
+        }
+
+        private static void SchemeSettings(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Profile>().HasKey(entity => entity.UserId);
             modelBuilder.Entity<Book>().HasKey(entity => entity.BookId);

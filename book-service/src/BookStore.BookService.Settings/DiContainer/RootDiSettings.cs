@@ -67,7 +67,7 @@ public static class RootDiSettings
             .AddDefaultResourcesTools<BaseDbContext, DatabaseInitRuntime,
                 BaseDatabaseConfig>(configuration)
             .AddBlResources()
-            .AddDefaultSwaggerSettings2(authorizationServiceConfig, swaggerConfig, xmlDocName,
+            .AddDefaultSwaggerSettings(authorizationServiceConfig, swaggerConfig, xmlDocName,
                 xmlDocPath, typeof(Contracts.Helpers.TargetAssemblyType).Assembly)
             .AddAutoMapper(mapperAssembly)
             .AddDefaultFluentValidationSettings(validatorsAssembly)

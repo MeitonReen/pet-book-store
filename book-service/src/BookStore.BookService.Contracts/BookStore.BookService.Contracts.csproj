@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="BookStore.Base.Contracts.Abstractions" Version="1.0.0" />
         <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.0" />
-        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.179" />
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.180" />
         <PackageReference Include="BookStore.Base.InterserviceContracts" Version="1.0.43" />
     </ItemGroup>
 

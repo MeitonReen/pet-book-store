@@ -1,4 +1,5 @@
 ﻿using BookStore.Base.DefaultConfigs;
+using BookStore.Base.Implementations.BookStoreDefaultExceptionHandling.Masstransit.Extensions;
 using BookStore.Base.Implementations.BookStoreDefaultLogging.Masstransit.Extensions;
 using BookStore.Base.Implementations.CorrelationId.MassTransitSupport.Extensions;
 using BookStore.Base.InterserviceContracts.BookService.V1_0_0.Book.V1_0_0.Delete;
@@ -10,6 +11,11 @@ using BookStore.BookService.Contracts.Book.V1_0_0.Update;
 using BookStore.BookService.Data.BaseDatabase;
 using BookStore.BookService.Data.Book.V1_0_0.DeleteOut.SagaInstance;
 using BookStore.BookService.Data.SagasDatabase;
+using BookStore.BookService.Settings.Resources.Book.V1_0_0.Delete;
+using BookStore.BookService.Settings.Resources.Book.V1_0_0.DeleteOut;
+using BookStore.BookService.Settings.Resources.Book.V1_0_0.Read;
+using BookStore.BookService.Settings.Resources.Book.V1_0_0.Update;
+using BookStore.BookService.Settings.Resources.BookExistence.V1_0_0.Read;
 using BookStore.BookService.WebEntryPoint.Book.V1_0_0.Delete.MassTransitCourierActivities;
 using BookStore.BookService.WebEntryPoint.Book.V1_0_0.DeleteOut;
 using BookStore.BookService.WebEntryPoint.Book.V1_0_0.Read;
@@ -34,32 +40,36 @@ public static class MassTransitDiSettings
                 // var schedulerEndpoint = new Uri($"queue:{schedulerQueueName}");
                 //
                 // sets.AddMessageScheduler(schedulerEndpoint);
-                // sets.AddDefaultTransactionOutbox<BaseDbContext>();
+                sets.AddDefaultTransactionOutbox<BaseDbContext>();
                 sets.AddDefaultTransactionOutbox<SagasDbContext>();
 
                 sets.AddRequestClient<UpdateBookRequest>();
                 sets.AddRequestClient<DeleteBookRequest>();
 
-                sets.AddConsumer<ReadBookRequestFromOrderServiceConsumer>();
-                sets.AddConsumer<ReadBookExistenceRequestConsumer>();
+                sets.AddConsumer<ReadBookRequestFromOrderServiceConsumer,
+                    ReadBookRequestFromOrderServiceConsumerDefinition>();
+                sets.AddConsumer<ReadBookExistenceRequestConsumer,
+                    ReadBookExistenceRequestConsumerDefinition>();
 
                 sets.AddActivity<UpdateBookCommandActivity, UpdateBookCommand, UpdateBookCompensateCommand,
                     UpdateBookCommandActivityDefinition>();
-
                 sets.AddActivity<DeleteBookCommandActivity, DeleteBookCommand, Book,
                     DeleteBookCommandActivityDefinition>();
 
-                sets.AddSagaStateMachine<SagaOrchestrator, SagaOrchestratorInstance,
-                    SagaOrchestratorInstanceDefinition>().EntityFrameworkRepository(efRepSets =>
-                {
-                    efRepSets.ConcurrencyMode = ConcurrencyMode.Optimistic;
-                    efRepSets.UsePostgres();
-                    efRepSets.ExistingDbContext<SagasDbContext>();
-                });
+                sets
+                    .AddSagaStateMachine<SagaOrchestrator, SagaOrchestratorInstance,
+                        SagaOrchestratorDefinition>()
+                    .EntityFrameworkRepository(efRepSets =>
+                    {
+                        efRepSets.ConcurrencyMode = ConcurrencyMode.Optimistic;
+                        efRepSets.UsePostgres();
+                        efRepSets.ExistingDbContext<SagasDbContext>();
+                    });
 
-                sets.AddSagaStateMachine<WebEntryPoint.Book.V1_0_0.UpdateOut.SagaOrchestrator,
+                sets
+                    .AddSagaStateMachine<WebEntryPoint.Book.V1_0_0.UpdateOut.SagaOrchestrator,
                         Data.Book.V1_0_0.UpdateOut.SagaInstance.SagaOrchestratorInstance,
-                        Data.Book.V1_0_0.UpdateOut.SagaInstance.SagaOrchestratorInstanceDefinition>()
+                        Resources.Book.V1_0_0.UpdateOut.SagaOrchestratorDefinition>()
                     .EntityFrameworkRepository(efRepSets =>
                     {
                         efRepSets.ConcurrencyMode = ConcurrencyMode.Optimistic;
@@ -73,7 +83,7 @@ public static class MassTransitDiSettings
                 {
                     rabbitMqSets.UseCorrelationId(context);
                     rabbitMqSets.UseBookStoreDefaultLogging(context);
-                    // rabbitMqSets.UseBookStoreDefaultExceptionHandling();
+                    rabbitMqSets.UseBookStoreDefaultExceptionHandling();
 
                     rabbitMqSets.MassTransitDateOnlyTimeOnlyTempFix();
                     // rabbitMqSets.ConfigureJsonSerializerOptions(setsJsonSer =>
