@@ -11,8 +11,9 @@
         <PackageReference Include="AutoMapper" Version="11.0.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="BookStore.AuthorizationService.Defaults" Version="1.0.6" />
-        <PackageReference Include="BookStore.Base.Contracts.Abstractions" Version="1.0.0" />
-        <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.0" />
+        <PackageReference Include="BookStore.Base.Abstractions" Version="1.0.4" />
+        <PackageReference Include="BookStore.Base.Contracts.Abstractions" Version="1.0.2" />
+        <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.2" />
         <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.61" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />

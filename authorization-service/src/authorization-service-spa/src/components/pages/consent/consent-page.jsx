@@ -22,7 +22,7 @@ function ConsentPage(props) {
         );
 
     return (
-        <div className='consent-page'>
+        <div className='consent-page' onKeyDown={e => downEnter(e)} tabIndex={-1}>
             <p className='consent-page__title'>Requested permissions:</p>
 
             <div className='consent-page__scopes-management'>
@@ -125,6 +125,11 @@ function ConsentPage(props) {
                 acc[scopeName] = false;
                 return acc;
             }, {});
+    }
+    function downEnter(event){
+        if (event.keyCode === 13) {
+            tryAuthorize();
+        }
     }
 }
 export default ConsentPage;

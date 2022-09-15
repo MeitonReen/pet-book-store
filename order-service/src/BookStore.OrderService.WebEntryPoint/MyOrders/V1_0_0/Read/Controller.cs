@@ -71,15 +71,17 @@ public class Controller : BookStoreControllerBase
                 .ProjectTo<ReadResponse>(_mapperConfigurationProvider)
                 .AsNoTracking());
 
-        IEnumerable<ReadResponse> targetResource;
+        ICollection<ReadResponse> targetResource;
         try
         {
-            targetResource = await configuredResourceCollection.ReadAsync();
+            targetResource = await configuredResourceCollection.ReadAsync(
+                sets => sets.ToListAsync());
         }
         catch (Exception e)
             when (BookStoreExceptionHandlingDefaults.WhenExpressions.RepeatRead(e))
         {
-            targetResource = await configuredResourceCollection.ReadAsync();
+            targetResource = await configuredResourceCollection.ReadAsync(
+                sets => sets.ToListAsync());
         }
 
         var targetResult = targetResource

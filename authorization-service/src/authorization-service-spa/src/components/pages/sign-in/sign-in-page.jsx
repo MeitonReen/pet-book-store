@@ -17,9 +17,9 @@ function SignInPage(props) {
     const navigate = useNavigate();
 
     return (
-        <div className='sign-in-page'>
+        <div className='sign-in-page' onKeyDown={e => downEnter(e)}>
             <label className='sign-in-page__login-title' htmlFor='sign-in-page__login'>Login:</label>
-            <input className='sign-in-page__login-input' type='text' id='sign-in-page__login'
+            <input className='sign-in-page__login-input' autoFocus type='text' id='sign-in-page__login'
                 value={login} onChange={e => updateLogin(e.target.value)} />
 
             <label className='sign-in-page__password-title' htmlFor='sign-in-page__password'>Password:</label>
@@ -58,6 +58,11 @@ function SignInPage(props) {
     function updatePassword(newValue) {
         setErrorMessage('');
         setPassword(newValue);
+    }
+    function downEnter(event){
+        if (event.keyCode === 13) {
+            tryAuthorize();
+        }
     }
 }
 export default SignInPage;

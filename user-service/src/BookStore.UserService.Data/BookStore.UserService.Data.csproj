@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="AppAny.Quartz.EntityFrameworkCore.Migrations" Version="0.1.17" />
         <PackageReference Include="AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL" Version="0.1.17" />
-        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.180" />
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.184" />
         <PackageReference Include="BookStore.Base.InterserviceContracts" Version="1.0.43" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.0.6" />

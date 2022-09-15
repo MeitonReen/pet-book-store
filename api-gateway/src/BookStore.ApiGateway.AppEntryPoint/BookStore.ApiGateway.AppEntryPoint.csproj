@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.0" />
+        <PackageReference Include="BookStore.Base.Contracts.Implementations" Version="1.0.2" />
         <PackageReference Include="BookStore.Base.DefaultSettings" Version="1.0.61" />
         <PackageReference Include="MMLib.SwaggerForOcelot" Version="5.2.0" />
         <PackageReference Include="Ocelot" Version="18.0.0" />

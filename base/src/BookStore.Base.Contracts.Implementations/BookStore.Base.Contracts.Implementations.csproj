@@ -17,7 +17,7 @@
     
     <PropertyGroup>
         <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
-        <PackageVersion>1.0.0</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
     </PropertyGroup>
 
     <Target Name="PushToFeed" AfterTargets="Pack">

@@ -49,7 +49,7 @@
 
     <PropertyGroup>
         <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
-        <PackageVersion>1.0.180</PackageVersion>
+        <PackageVersion>1.0.184</PackageVersion>
     </PropertyGroup>
 
     <Target Name="PushToFeed" AfterTargets="Pack">

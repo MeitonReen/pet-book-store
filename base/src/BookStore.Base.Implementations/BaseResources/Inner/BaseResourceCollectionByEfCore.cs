@@ -42,14 +42,55 @@ namespace BookStore.Base.Implementations.BaseResources.Inner
             return targetResourceEntityArray;
         }
 
+        public ICollection<TResourceEntity> Create(ICollection<TResourceEntity> targetResourceEntityCollection)
+        {
+            var targetResourceEntityArray = targetResourceEntityCollection.ToArray();
+            _baseResourceEntityCollection.AddRange(targetResourceEntityArray);
+
+            return targetResourceEntityArray;
+        }
+
         public IEnumerable<TResourceEntity> Read() =>
             _readSettings(
-                _targetResourceEntityCollectionSelector(_baseResourceEntityCollection));
-
-        public async Task<IEnumerable<TResourceEntity>> ReadAsync() =>
-            await _readSettings(
                     _targetResourceEntityCollectionSelector(_baseResourceEntityCollection))
-                .ToArrayAsync();
+                .ToList();
+
+        public ICollection<TResourceEntity> Read(
+            Func<IQueryable<TResourceEntity>, ICollection<TResourceEntity>> executeSettings)
+            => executeSettings(
+                _readSettings(
+                    _targetResourceEntityCollectionSelector(
+                        _baseResourceEntityCollection)));
+        public List<TResourceEntity> Read(
+            Func<IQueryable<TResourceEntity>, List<TResourceEntity>> executeSettings)
+            => executeSettings(
+                _readSettings(
+                    _targetResourceEntityCollectionSelector(
+                        _baseResourceEntityCollection)));
+
+        public async Task<IEnumerable<TResourceEntity>> ReadAsync()
+            => await _readSettings(
+                    _targetResourceEntityCollectionSelector(
+                        _baseResourceEntityCollection))
+                .ToListAsync();
+
+        public async Task<ICollection<TResourceEntity>> ReadAsync(
+            Func<IQueryable<TResourceEntity>, Task<ICollection<TResourceEntity>>> executeSettings)
+            => await executeSettings(
+                _readSettings(
+                    _targetResourceEntityCollectionSelector(
+                        _baseResourceEntityCollection)));
+        public async Task<List<TResourceEntity>> ReadAsync(
+            Func<IQueryable<TResourceEntity>, Task<List<TResourceEntity>>> executeSettings)
+            => await executeSettings(
+                _readSettings(
+                    _targetResourceEntityCollectionSelector(
+                        _baseResourceEntityCollection)));
+
+        // public async Task<IEnumerable<TResourceEntity>> ReadAsync() =>
+        //     await _readSettings(
+        //             _targetResourceEntityCollectionSelector(_baseResourceEntityCollection))
+        //         .ToArrayAsync();
 
         public IBaseResourceCollection<TResourceEntity> ReadSettings(
             Func<IQueryable<TResourceEntity>, IQueryable<TResourceEntity>> readSettings)
@@ -83,6 +124,10 @@ namespace BookStore.Base.Implementations.BaseResources.Inner
                 _readSettings(
                     _targetResourceEntityCollectionSelector(_baseResourceEntityCollection))));
 
+        IEnumerable<TResourceEntity> IBaseResourceCollection<TResourceEntity>.Read()
+        {
+            return Read();
+        }
 
         public IEnumerable<TResourceEntity> Update(
             IEnumerable<TResourceEntity> targetResourceEntityCollection)
@@ -93,8 +138,24 @@ namespace BookStore.Base.Implementations.BaseResources.Inner
             return targetResourceEntityArray;
         }
 
+        public ICollection<TResourceEntity> Update(ICollection<TResourceEntity> targetResourceEntityCollection)
+        {
+            var targetResourceEntityArray = targetResourceEntityCollection.ToArray();
+            _baseResourceEntityCollection.UpdateRange(targetResourceEntityArray);
+
+            return targetResourceEntityArray;
+        }
+
         public IEnumerable<TResourceEntity> Delete(
             IEnumerable<TResourceEntity> targetResourceEntityCollection)
+        {
+            var targetResourceEntityArray = targetResourceEntityCollection.ToArray();
+            _baseResourceEntityCollection.RemoveRange(targetResourceEntityArray);
+
+            return targetResourceEntityArray;
+        }
+
+        public ICollection<TResourceEntity> Delete(ICollection<TResourceEntity> targetResourceEntityCollection)
         {
             var targetResourceEntityArray = targetResourceEntityCollection.ToArray();
             _baseResourceEntityCollection.RemoveRange(targetResourceEntityArray);

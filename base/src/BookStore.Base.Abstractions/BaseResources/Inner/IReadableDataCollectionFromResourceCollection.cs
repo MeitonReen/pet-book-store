@@ -5,7 +5,19 @@
     {
         IEnumerable<TDataCollectionItem> Read();
 
+        ICollection<TDataCollectionItem> Read(
+            Func<IQueryable<TDataCollectionItem>, ICollection<TDataCollectionItem>> executeSettings);
+
+        List<TDataCollectionItem> Read(
+            Func<IQueryable<TDataCollectionItem>, List<TDataCollectionItem>> executeSettings);
+
         Task<IEnumerable<TDataCollectionItem>> ReadAsync();
+
+        Task<ICollection<TDataCollectionItem>> ReadAsync(
+            Func<IQueryable<TDataCollectionItem>, Task<ICollection<TDataCollectionItem>>> executeSettings);
+
+        Task<List<TDataCollectionItem>> ReadAsync(
+            Func<IQueryable<TDataCollectionItem>, Task<List<TDataCollectionItem>>> executeSettings);
 
         IReadableDataCollectionFromResourceCollection<TDataCollectionItem> ReadSettings(
             Func<IQueryable<TDataCollectionItem>, IQueryable<TDataCollectionItem>> readSettings);

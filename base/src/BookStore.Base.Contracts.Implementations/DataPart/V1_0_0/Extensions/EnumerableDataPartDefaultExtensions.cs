@@ -21,17 +21,17 @@ public static class EnumerableDataPartDefaultExtensions
             .Take(baseDataPartRequest.PartLength);
 
     public static BaseDataPartResponse<TDataPartItem> ToDataPartResponse<TDataPartItem>(
-        this IEnumerable<TDataPartItem> dataSetPart,
+        this ICollection<TDataPartItem> dataSetPart,
         BaseDataPartRequest baseDataPartRequest,
         int dataTotalCount)
     {
-        var arraySetPart = dataSetPart.ToArray();
+        var length = dataSetPart.Count;
 
         return new DefaultDataPartResponse<TDataPartItem>
         {
-            Items = arraySetPart,
-            PartLength = arraySetPart.Length,
-            PartNumber = arraySetPart.Length == 0 ? 0 : baseDataPartRequest.PartNumber,
+            Items = dataSetPart.ToAsyncEnumerable(),
+            PartLength = length,
+            PartNumber = length == 0 ? 0 : baseDataPartRequest.PartNumber,
             LastPartNumber = (int) Math
                 .Ceiling((double) dataTotalCount / baseDataPartRequest.PartLength)
         };

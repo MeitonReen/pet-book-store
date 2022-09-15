@@ -9,6 +9,9 @@ namespace BookStore.Base.Abstractions.BaseResources.Inner
         IEnumerable<TResourceEntity> Create(IEnumerable<TResourceEntity>
             targetResourceEntityCollection);
 
+        ICollection<TResourceEntity> Create(ICollection<TResourceEntity>
+            targetResourceEntityCollection);
+
         IBaseResourceCollection<TResourceEntity> ReadSettings(
             Func<IQueryable<TResourceEntity>, IQueryable<TResourceEntity>> readSettings);
 
@@ -26,10 +29,30 @@ namespace BookStore.Base.Abstractions.BaseResources.Inner
             where TResultDataItem : class;
 
         IEnumerable<TResourceEntity> Read();
+
+        ICollection<TResourceEntity> Read(
+            Func<IQueryable<TResourceEntity>, ICollection<TResourceEntity>> executeSettings);
+
+        List<TResourceEntity> Read(
+            Func<IQueryable<TResourceEntity>, List<TResourceEntity>> executeSettings);
+
+
         Task<IEnumerable<TResourceEntity>> ReadAsync();
+
+        Task<ICollection<TResourceEntity>> ReadAsync(
+            Func<IQueryable<TResourceEntity>, Task<ICollection<TResourceEntity>>> executeSettings);
+
+        Task<List<TResourceEntity>> ReadAsync(
+            Func<IQueryable<TResourceEntity>, Task<List<TResourceEntity>>> executeSettings);
+
+        ICollection<TResourceEntity> Update(
+            ICollection<TResourceEntity> targetResourceEntityCollection);
 
         IEnumerable<TResourceEntity> Update(
             IEnumerable<TResourceEntity> targetResourceEntityCollection);
+
+        ICollection<TResourceEntity> Delete(
+            ICollection<TResourceEntity> targetResourceEntityCollection);
 
         IEnumerable<TResourceEntity> Delete(
             IEnumerable<TResourceEntity> targetResourceEntityCollection);

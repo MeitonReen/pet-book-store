@@ -9,7 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.180" />
+        <PackageReference Include="BookStore.Base.Abstractions" Version="1.0.4" />
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.184" />
         <PackageReference Include="BookStore.Base.InterserviceContracts" Version="1.0.43" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="MassTransit.Abstractions" Version="8.0.6" />

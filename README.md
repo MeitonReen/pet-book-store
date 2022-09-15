@@ -43,7 +43,7 @@ OtherServices:
 * `TestDefaultUser`-->`FS2kaS(2!@`; available permissions: `openid`, `profile`, `default-user-resources.crud`.
 
 ## Schemes
-[Book store schemes](https://github.com/MeitonReen/pet-book-store/blob/main/BookStoreSchemes_v3.png)
+[Book store schemes](https://github.com/MeitonReen/pet-book-store/blob/main/BookStoreSchemes_v4.png)
 
 ## Registration
 * [run](#run);

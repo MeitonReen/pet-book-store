@@ -18,7 +18,7 @@ function SignUpPage(props) {
 
     return (
         !accountIsCreated ?
-            <div className='sign-up-page'>
+            <div className='sign-up-page' onKeyDown={e => downEnter(e)}>
                 <label className='sign-up-page__login-title' htmlFor='sign-up-page__login'>Login:</label>
                 <input className='sign-up-page__login-input' type='text' id='sign-up-page__login'
                     value={login} onChange={e => setLogin(e.target.value)} />
@@ -53,6 +53,11 @@ function SignUpPage(props) {
 
         setAccountIsCreated(false);
         return;
+    }
+    function downEnter(event){
+        if (event.keyCode === 13) {
+            tryCreateAccount();
+        }
     }
 }
 export default SignUpPage;

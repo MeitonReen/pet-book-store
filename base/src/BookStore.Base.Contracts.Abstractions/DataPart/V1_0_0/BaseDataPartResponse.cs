@@ -2,8 +2,8 @@
 {
     public abstract class BaseDataPartResponse<TDataPartItem>
     {
-        public IEnumerable<TDataPartItem> Items { get; set; } =
-            Enumerable.Empty<TDataPartItem>();
+        public IAsyncEnumerable<TDataPartItem> Items { get; set; } =
+           AsyncEnumerable.Empty<TDataPartItem>();
 
         public int PartLength { get; set; }
         public int PartNumber { get; set; }

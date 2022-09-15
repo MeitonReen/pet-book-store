@@ -26,7 +26,7 @@ public class BookStoreDefaultExceptionHandlerPipeline : IBookStoreDefaultExcepti
     public IActionResult? Handle(Exception exception)
     {
         IActionResult? result = default;
-        _exceptionHandlers.FirstOrDefault(handler =>
+        _ = _exceptionHandlers.FirstOrDefault(handler =>
         {
             result = handler.Handle(exception);
             return result != default;

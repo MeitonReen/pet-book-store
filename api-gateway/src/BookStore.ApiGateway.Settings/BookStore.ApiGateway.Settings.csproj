@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.180" />
+        <PackageReference Include="BookStore.Base.Implementations" Version="1.0.184" />
         <PackageReference Include="BookStore.Base.NonAttachedExtensions" Version="1.0.30" />
         <PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
         <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />

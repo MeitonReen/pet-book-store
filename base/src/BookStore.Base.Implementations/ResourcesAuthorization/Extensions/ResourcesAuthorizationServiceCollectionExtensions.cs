@@ -62,7 +62,6 @@ public static class ResourcesAuthorizationServiceCollectionExtensions
             });
         var resourcesRequirementProvider = new ResourcesRequirementPolicyProvider();
 
-
         var definedPolicyStringsByAuthorizationRequirement = await Task
             .WhenAll(definedPolicyStrings
                 .Select(async el => (
